@@ -1,22 +1,19 @@
 image:
-  repository: tccr.io/truecharts/kaizoku
+  repository: ghcr.io/zyradyl/kaizoku
   pullPolicy: IfNotPresent
-  tag: v1.6.1@sha256:b3a80cf6ad2d080845a0e4851872f91657198381c587b5393ade77d5bee92b7d
-
+  tag: v1.7.0@sha256:fa87a247256888981acaedac99631e50729957a73e0729a6e8d6a6e397f5809a
 securityContext:
   container:
     runAsNonRoot: false
     readOnlyRootFilesystem: false
     runAsUser: 0
     runAsGroup: 0
-
 service:
   main:
     ports:
       main:
         protocol: http
         port: 3000
-
 workload:
   main:
     podSpec:
@@ -34,7 +31,6 @@ workload:
                 name: '{{ printf "%s-%s" .Release.Name "rediscreds" }}'
                 key: plainhost
             REDIS_PORT: 6379
-
 persistence:
   config:
     enabled: true
@@ -45,16 +41,13 @@ persistence:
   data:
     enabled: true
     mountPath: "/data"
-
 cnpg:
   main:
     enabled: true
     user: kaizoku
     database: kaizoku
-
 redis:
   enabled: true
-
 portal:
   open:
     enabled: true
